@@ -91,7 +91,9 @@ public class ExitSpan extends StackBasedTracingSpan implements ExitTypeSpan {
 
     @Override
     public ExitSpan log(Throwable t) {
-        super.log(t);
+        if (stackDepth == 1 || isInAsyncMode) {
+            super.log(t);
+        }
         return this;
     }
 
